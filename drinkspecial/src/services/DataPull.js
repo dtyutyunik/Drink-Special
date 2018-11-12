@@ -14,5 +14,4 @@ export default async function GetData(path){
   // http://www.thecocktaildb.com/api/json/v1/1/list.php?a=list
 
 
-
 }
