@@ -3,6 +3,7 @@ import GetData from './services/DataPull';
 import './App.css';
 import axios from 'axios';
 import RenderChoices from './components/RenderChoices';
+import RenderRandom from './components/RenderRandom';
 
 
 const KEYS=process.env.REACT_APP_DRINKING_API_KEY;
@@ -17,20 +18,38 @@ class App extends Component {
       view: ''
     }
 
+    this.setView=this.setView.bind(this);
+    this.getView=this.getView.bind(this);
 
   }
 
 
   setView(screens){
-    console.log(screens)
+    console.log(screens);
+
     this.setState({
       view: screens
     })
 
+    switch(screens){
+      case 'Random': return this.getView('Random');
+    }
 
   }
 
-  getView(){
+  async getView(load){
+
+    switch(load){
+      case 'Random':
+      const randoms=await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/random.php`);
+      console.log(randoms.data);
+
+        this.setState({
+          drink: randoms.data.drinks
+        })
+      // return randoms;
+    }
+
 
   }
 
@@ -60,6 +79,13 @@ class App extends Component {
     return (
       <div className="App">
 
+        <button>Categories</button>
+        <button onClick={()=>this.setView('Random')}>Random</button>
+        <input
+          type="text"
+          placeholder="search for a drink">
+        </input>
+        <RenderRandom oneDrink={this.state.drink}/>
 {/*
       <RenderChoices result={this.state.drink}/>
 */}
