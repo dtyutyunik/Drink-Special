@@ -12,19 +12,21 @@ go through array filter to see if the keys incldues the word, if true then get t
 
 */
 
-let ingredients=[];
+// let ingredients=[];
 let nameOfDrink=[];
 let quantity=[];
 let overall=[];
 
-  // console.log('names are ', nameOfDrink);
+  console.log('names are ', nameOfDrink);
   // console.log('ingredients are ',ingredients);
   // console.log('quanity are ',quantity);
   props.result.map(e => {
     for(let i in e){
+      // console.log('names are ', e[i]);
       // pushes ingredients into array
       if(i.match(/\b(strIngredient)/)){
         if(e[i]!==''){
+          // console.log('ingredients are ',e[i]);
           // nameOfDrink.push(e.strDrink);
           // ingredients.push(e[i]);
         }
@@ -33,11 +35,25 @@ let overall=[];
       if(i.match(/\b(strMeasure)/)){
 
         if(e[i]!=="" && e[i]!==" "){
+          // console.log('quanity are ',e[i]);
           // quantity.push(e[i]);
         }
       }
     }
   });
+
+  // function renderIng() {
+  //   debugger
+  //   for(let i = 1; i < 15; i+=1) {
+  //     if(props.result[0]){
+  //     if (props.result[0][`strIngredient${i}`]) {
+  //       ingredients.push(props.result[0][`strIngredient${i}`]);
+  //     }
+  //     }
+  //   }
+  // }
+  // renderIng();
+  // console.log(ingredients)
 
   // console.log("nameOfDrink ",nameOfDrink);
   // console.log("ingridents ",ingredients);
@@ -47,30 +63,19 @@ let overall=[];
 return(
 
  props.result.map(function(e){
-   {/*
-    console.log('this is obj', e)
-
-    for( let i in e){
-
-      if(i.match(/\b(strIngredient)/)){
-        if(e[i]!==''){
-
-          ingredients.push(e[i])
-          console.log("ing "+e[i]);
-        }
-      }
-
-      if(i.match(/\b(strMeasure)/)){
-
-        if(e[i]!=="" && e[i]!==" "){
-          console.log("quant "+e[i]);
-
-        }
-      }
-    }
-
-*/}
-
+   function showIng() {
+     let ingredients = [];
+     let measure = [];
+     for(let i = 1; i < 15; i+=1) {
+       if(e[`strIngredient${i}`]){
+         ingredients.push(e[`strIngredient${i}`]);
+         measure.push(e[`strMeasure${i}`]);
+       }}
+return ingredients.map((p,i) => {
+  return (
+    <p>{p} : {measure[i]}</p>
+  )
+})}
 
     return(
       <div key={e.idDrink} className="drinkInfo">
@@ -83,8 +88,7 @@ return(
           <p>Instructions: {e.strInstructions}</p>
             <p>Category: {e.strCategory}</p>
             <p>Served in: {e.strGlass}</p>
-      {/*    <p>{e.strIngredient1} {e.strMeasure1}, {e.strIngredient2} {e.strMeasure2}</p>
-    */}
+            {showIng()}
         </div>
 
 

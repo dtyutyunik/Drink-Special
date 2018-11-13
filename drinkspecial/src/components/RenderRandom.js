@@ -9,10 +9,11 @@ export default function RenderRandom(props){
             <div className='breakdown'>
 
               <p>Name: {e.strDrink}</p>
-              <p>Alcohol?: {e.strAlcoholic}</p>
-              <p>Instructions: {e.strInstructions}</p>
+              <p>{e.strAlcoholic}</p>
               <p>Category: {e.strCategory}</p>
               <p>Served in: {e.strGlass}</p>
+              <p>Instructions: {e.strInstructions}</p>
+
             </div>
 
 
