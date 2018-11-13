@@ -16,7 +16,7 @@ export default function RenderRandom(props){
             </div>
 
 
-              <img src={`${e.strDrinkThumb}`}/>
+              <img src={`${e.strDrinkThumb}`} alt={e.strDrink}/>
           </div>
         )
       }
