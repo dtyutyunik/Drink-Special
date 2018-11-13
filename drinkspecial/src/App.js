@@ -51,7 +51,8 @@ class App extends Component {
       console.log(randoms.data);
 
         this.setState({
-          rando: randoms.data.drinks
+          rando: randoms.data.drinks,
+          drink: []
         })
         default:
       // return randoms;
@@ -107,7 +108,8 @@ class App extends Component {
         })
       }else{
         this.setState({
-            drink: []
+            drink: [],
+            rando: []
         })
 
         console.log("bad data")
