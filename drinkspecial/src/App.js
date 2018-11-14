@@ -5,6 +5,7 @@ import axios from 'axios';
 import RenderChoices from './components/RenderChoices';
 import RenderRandom from './components/RenderRandom';
 import RenderCategories from './components/RenderCategories';
+import DetailBreakdown from './components/DetailBreakdown';
 
 
 
@@ -22,7 +23,8 @@ class App extends Component {
       rando: [],
       categories: [],
       visible: '',
-      cats:[]
+      cats:[],
+      oneDrink: []
     }
 
     this.setView=this.setView.bind(this);
@@ -31,7 +33,8 @@ class App extends Component {
     this.handleChange=this.handleChange.bind(this);
     this.specialRender=this.specialRender.bind(this);
     this.showInfo=this.showInfo.bind(this);
-
+    this.giveMeWord=this.giveMeWord.bind(this);
+    this.oneDrinkInfo=this.oneDrinkInfo.bind(this);
   }
 
 
@@ -59,7 +62,9 @@ class App extends Component {
 
         this.setState({
           rando: randoms.data.drinks,
-          drink: []
+          drink: [],
+          cats: [],
+          visible: ''
         })
         default:
       // return randoms;
@@ -110,12 +115,16 @@ async showCategories(){
 
         this.setState({
           drink: info.data.drinks,
-          rando: []
+          rando: [],
+          cats: [],
+          visible: ''
         })
       }else{
         this.setState({
             drink: [],
-            rando: []
+            rando: [],
+            cats: [],
+            visible: ''
         })
 
         console.log("bad data")
@@ -133,10 +142,30 @@ async showCategories(){
          // console.log(moreInfo);
 
          this.setState({
-           cat: moreInfo,
+           cats: moreInfo,
          })
-         console.log('inside showinfo is ',this.state.cat);
+         console.log('inside showinfo is ',this.state.cats);
      }
+
+
+giveMeWord(e){
+  // console.log('inside give me word ',e.target.id)
+  this.oneDrinkInfo(e.target.id);
+
+}
+
+async oneDrinkInfo(word){
+  const info= await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${word}`);
+  console.log(info.data.drinks);
+
+  this.setState({
+    oneDrink: info.data.drinks
+  })
+
+  // console.log('oneDrinkInfo ', this.state.oneDrink)
+
+}
+
 
 
 
@@ -145,9 +174,7 @@ async showCategories(){
       <div className="App">
 
         <button onClick={this.showCategories}>Categories</button>
-
         <button onClick={()=>this.setView('Random')}>Random</button>
-
         <input
           type="text"
           placeholder="search for a drink"
@@ -157,20 +184,17 @@ async showCategories(){
         </input>
 
         <RenderChoices result={this.state.drink}/>
-
-        {/*<RenderChoices result={(this.state.selectDrink!==null)?this.state.selectDrink:console.log('ohhhhh')}/>*/}
         <RenderRandom oneDrink={this.state.rando}/>
-
         <RenderCategories
           categories={this.state.categories}
           showInfo={this.showInfo}
-
           />
+        
+        <DetailBreakdown
+          info={this.state.cats}
+          giveMeWord={this.giveMeWord}
+          drinkDetail={this.state.oneDrink}/>
 
-{/*
-   <RenderRandom oneDrink={this.state.drink}/>
-      <RenderChoices result={this.state.drink}/>
-*/}
 
       </div>
 
