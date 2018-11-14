@@ -127,8 +127,10 @@ async showCategories(){
 
      async showInfo(id){
          const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${id}`);
+
+
          const moreInfo = info.data.drinks;
-         console.log(moreInfo);
+         // console.log(moreInfo);
 
          this.setState({
            cat: moreInfo,
@@ -162,7 +164,7 @@ async showCategories(){
         <RenderCategories
           categories={this.state.categories}
           showInfo={this.showInfo}
-          individualInfo={this.state.cat}
+
           />
 
 {/*
