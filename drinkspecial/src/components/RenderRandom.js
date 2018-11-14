@@ -3,6 +3,8 @@ import React from 'react';
 export default function RenderRandom(props){
 
     return(
+
+
       props.oneDrink.map(function(e){
         return(
           <div key={e.idDrink} className="drinkInfo">

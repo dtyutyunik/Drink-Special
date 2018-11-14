@@ -70,30 +70,9 @@ class App extends Component {
 
 
 
-
-
-  //  async componentDidMount(){
-  //
-  //    const info=await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/search.php?s`);
-  //   // const info=await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/list.php?s=a`);
-  //   console.log(info.data.drinks);
-  //       this.setState({
-  //         drink: info.data.drinks,
-  //       })
-  //
-  //   // List the categories, glasses, ingredients or alcoholic filters
-  //   // http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
-  //   // http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list
-  //   // http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
-  //   // http://www.thecocktaildb.com/api/json/v1/1/list.php?a=list
-  //
-  //
-  // }
-
-
 async showCategories(){
   const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/list.php?c=list`);
-  console.log(info.data.drinks);
+  console.log('inside show categories method ',info.data.drinks);
 
   if(this.state.visible===''){
     this.setState({
@@ -154,6 +133,7 @@ async showCategories(){
          this.setState({
            cat: moreInfo,
          })
+         console.log('inside showinfo is ',this.state.cat);
      }
 
 
@@ -179,8 +159,12 @@ async showCategories(){
         {/*<RenderChoices result={(this.state.selectDrink!==null)?this.state.selectDrink:console.log('ohhhhh')}/>*/}
         <RenderRandom oneDrink={this.state.rando}/>
 
-        <RenderCategories categories={this.state.categories} showInfo={this.showInfo}/>
-        
+        <RenderCategories
+          categories={this.state.categories}
+          showInfo={this.showInfo}
+          individualInfo={this.state.cat}
+          />
+
 {/*
    <RenderRandom oneDrink={this.state.drink}/>
       <RenderChoices result={this.state.drink}/>

@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function Category(props){
   return(
-    props.showInfo.map(e=>{
-      return (
-        <div>
-          {e.strDrink}
-          <img src={`${e.strDrinkThumb}`}/>
-        </div>
+    <div>
+      {props.moreDetail.map(e=>{
+        {console.log('detail DetailBreakdown  ', e.strDrink)}
+        }
+      )
+    }
+    </div>
+
     )
-    })
-  )
-}
+  }

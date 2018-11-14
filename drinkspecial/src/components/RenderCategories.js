@@ -19,7 +19,14 @@ export default function RenderCategories(props){
   return(
       props.categories.map(e=>{
         // return <button onClick={()=>props.showInfo(e.strCategory)} id={e.strCategory} >{e.strCategory} </button>
-        return <button onClick={()=>props.showInfo(e.strCategory)} id={e.strCategory} >{e.strCategory} </button>
+        return <button
+          onClick={()=>props.showInfo(e.strCategory)}
+          id={e.strCategory}
+          moreDetail={props.individualInfo}
+
+          >
+            {e.strCategory}
+        </button>
     })
   )
 }

@@ -17,7 +17,7 @@ let nameOfDrink=[];
 let quantity=[];
 let overall=[];
 
-  console.log('names are ', nameOfDrink);
+  
   // console.log('ingredients are ',ingredients);
   // console.log('quanity are ',quantity);
   props.result.map(e => {
@@ -42,23 +42,6 @@ let overall=[];
     }
   });
 
-  // function renderIng() {
-  //   debugger
-  //   for(let i = 1; i < 15; i+=1) {
-  //     if(props.result[0]){
-  //     if (props.result[0][`strIngredient${i}`]) {
-  //       ingredients.push(props.result[0][`strIngredient${i}`]);
-  //     }
-  //     }
-  //   }
-  // }
-  // renderIng();
-  // console.log(ingredients)
-
-  // console.log("nameOfDrink ",nameOfDrink);
-  // console.log("ingridents ",ingredients);
-  // console.log("quantity ",quantity);
-// <DetailBreakdown sendThrough={ingredients}/>
 
 return(
 
