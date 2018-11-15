@@ -30,7 +30,8 @@ function RenderChoices(props) {
         Ingredients: {showIng()}
       </div>
 
-      <img src={`${e.strDrinkThumb}`}/>
+      <img src={`${e.strDrinkThumb}`}
+        alt={`${e.strDrinkThumb}`}/>
     </div>)
   }))
 

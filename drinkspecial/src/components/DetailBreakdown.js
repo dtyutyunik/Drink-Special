@@ -43,7 +43,11 @@ export default function DetailBreakdown(props) {
         </div>
 
       </div>
-      <img className="picHover" id={e.idDrink} onMouseEnter={props.giveMeWord} src={`${e.strDrinkThumb}`}/>
+      <img className="picHover"
+        id={e.idDrink}
+        onMouseEnter={props.giveMeWord}
+        src={`${e.strDrinkThumb}`}
+        alt={`${e.strDrinkThumb}`}/>
     </div>)
 
   }))
