@@ -18,7 +18,6 @@ export default function DetailBreakdown(props) {
                 function showIng() {
                   let ingredients = [];
                   let measure = [];
-
                   for (let i = 1; i < 15; i += 1) {
                     if (e[`strIngredient${i}`]) {
                       ingredients.push(e[`strIngredient${i}`]);
@@ -30,7 +29,6 @@ export default function DetailBreakdown(props) {
                       : {measure[i]}</div>)
                   })
                 }
-
 
                 return (<div>
                   <p>{e.strAlcoholic}</p>
@@ -45,7 +43,7 @@ export default function DetailBreakdown(props) {
         </div>
 
       </div>
-      <img id={e.idDrink} onClick={props.giveMeWord} src={`${e.strDrinkThumb}`}/>
+      <img className="picHover" id={e.idDrink} onMouseEnter={props.giveMeWord} src={`${e.strDrinkThumb}`}/>
     </div>)
 
   }))

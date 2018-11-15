@@ -1,205 +1,274 @@
-import React, { Component } from 'react';
-// import GetData from './services/DataPull';
+import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
 import RenderChoices from './components/RenderChoices';
 import RenderRandom from './components/RenderRandom';
 import RenderCategories from './components/RenderCategories';
 import DetailBreakdown from './components/DetailBreakdown';
+import Ingredientsa from './components/Ingridents';
+import IngridentsInfo from './components/IngridentsInfo';
 
-
-
-const KEYS=process.env.REACT_APP_DRINKING_API_KEY;
+const KEYS = process.env.REACT_APP_DRINKING_API_KEY;
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
-    this.state={
+    this.state = {
       drink: [],
-      view: '',
       selectDrink: [],
       rando: [],
       categories: [],
       visible: '',
-      cats:[],
-      oneDrink: []
+      categoriesBreakdown: [],
+      oneDrink: [],
+      selectIngrident: [],
+      choices: [],
+      test: [],
+      extended: [],
+      arr1:[],
+      arr2:[],
+      final:[]
     }
 
-    this.setView=this.setView.bind(this);
-    this.getView=this.getView.bind(this);
-    this.showCategories=this.showCategories.bind(this);
-    this.handleChange=this.handleChange.bind(this);
-    this.specialRender=this.specialRender.bind(this);
-    this.showInfo=this.showInfo.bind(this);
-    this.giveMeWord=this.giveMeWord.bind(this);
-    this.oneDrinkInfo=this.oneDrinkInfo.bind(this);
+    this.generateRandomData = this.generateRandomData.bind(this);
+    this.changeIngrident = this.changeIngrident.bind(this);
+    this.handleIngridentChange = this.handleIngridentChange.bind(this);
+    this.showCategories = this.showCategories.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.specialRender = this.specialRender.bind(this);
+    this.showInfo = this.showInfo.bind(this);
+    this.giveMeWord = this.giveMeWord.bind(this);
+    this.oneDrinkInfo = this.oneDrinkInfo.bind(this);
+    this.loadIngrident = this.loadIngrident.bind(this);
+
   }
 
+  async generateRandomData() {
 
+    const randoms = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/random.php`);
+    this.setState({rando: randoms.data.drinks, drink: [], categoriesBreakdown: [], visible: '', categories: []})
 
-  setView(screens){
-    console.log(screens);
+  }
 
-    this.setState({
-      view: screens
+  async showCategories() {
+    const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/list.php?c=list`);
+
+    //
+    if (this.state.visible === '') {
+      this.setState({
+        categories: info.data.drinks,
+        drink: [],
+        rando: [],
+        oneDrink: [],
+        categoriesBreakdown: [],
+        visible: 'a'
+      })
+
+    } else {
+      this.setState({
+        categories: [],
+        drink: [],
+        rando: [],
+        oneDrink: [],
+        categoriesBreakdown: [],
+        visible: ''
+      })
+    }
+
+  }
+
+  changeIngrident(e) {
+
+    this.setState({selectIngrident: e.target.value})
+
+  }
+
+  async handleIngridentChange(e) {
+    e.preventDefault();
+
+    // console.log('sleect Ingredient', this.state.selectIngrident)
+    // console.log('handle ingr is', this.state.selectIngrident);
+
+    // await this.setState({
+    //   choices: this.state.selectIngrident
+    // })
+
+    await this.setState({
+      choices: [
+        ...this.state.choices,
+        this.state.selectIngrident
+      ]
     })
 
-    switch(screens){
-      case 'Random': return this.getView('Random');
-      default:
-    }
-
+    // this.loadIngrident(this.state.choices);
+    this.loadIngrident(this.state.selectIngrident);
   }
 
-  async getView(load){
 
-    switch(load){
-      case 'Random':
-      const randoms=await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/random.php`);
-      console.log(randoms.data);
 
-        this.setState({
-          rando: randoms.data.drinks,
-          drink: [],
-          cats: [],
-          visible: ''
+  async loadIngrident(word) {
+
+    const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/filter.php?i=${word}`);
+    // console.log( "possible drink choices are ",info.data.drinks);
+
+    let master = [];
+
+
+    //arr1 holds the ids of the test
+
+      this.setState({
+        arr1: info.data.drinks.map(e=>{
+          return e.idDrink
         })
-        default:
-      // return randoms;
-    }
+      })
+
+      if(this.state.arr2.length<=0){
+        this.setState({
+          arr2: info.data.drinks.map(e=>{
+          return e.idDrink
+        })})
+
+          this.setState({
+            final: info.data.drinks.map(e=>{
+              return e.idDrink
+            })
+          })
+
+      }else if(this.state.arr2.length>0){
+        let newArr = [];
+        this.state.arr1.filter(e => {
+          for(let i = 0; i< this.state.arr2.length; i++) {
+            if(e === this.state.arr2[i]) {
+              newArr.push(e);
+            }
+          }
+        })
+        console.log('New Array: ', newArr);
+        this.setState({
+          final: newArr
+        })
+
+      }
+/*        // const final = this.state.final;
+        // for(let i = 0; i<final.length; i++) {
+          // this.state.arr2.map
+        // }
+          // console.log("i is", i);
+          this.state.arr2.map(e=>{
+            // console.log('e is', e)
+            if(i===e){
+            return master.push[i];
+              // this.setState((state) => ({final: [...state.final, i]}))
+              // console.log("match at", i);
+            }
+
+            // return i===e
+          })
+        })
+        this.setState({
+          final: master
+        })
+      }
+*/
+/*
+        for(let i=0;i<this.state.arr1.length-1;i++){
+          for(let j=0;j<this.state.arr2.length-1;j++){
+            if(this.state.arr1[i]===this.state.arr2[j]){
+              console.log('match is',this.state.arr1[i])
+
+              this.setState({
+                final: [this.state.final,...this.state.arr1[i]]
+              })
+              // this.setState({
+              //   final: this.state.arr2[i]
+              // })
+
+            }
+
+          }
+        }
+*/
+    console.log('arr1 after data gather is', this.state.arr1);
+    console.log('arr2 after data gather is', this.state.arr2);
+    console.log('final after data gather is', this.state.final);
+
 
 
   }
 
 
+handleChange(e) {
 
-async showCategories(){
-  const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/list.php?c=list`);
-  console.log('inside show categories method ',info.data.drinks);
+  this.setState({selectDrink: e.target.value})
+  this.specialRender(e.target.value);
 
-  if(this.state.visible===''){
-    this.setState({
-      categories: info.data.drinks,
-      visible: 'a'
-    })
+}
 
-  }
-  else{
-    this.setState({
-      categories: [],
-      visible: ''
-    })
+async specialRender(word) {
+
+  const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/search.php?s=${word}`)
+
+  if (!!info.data.drinks) {
+
+    this.setState({drink: info.data.drinks, rando: [], categoriesBreakdown: [], visible: ''})
+  } else {
+    this.setState({drink: [], rando: [], categoriesBreakdown: [], visible: ''})
   }
 
 }
 
-    handleChange(e){
+async showInfo(id) {
+  const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${id}`);
 
-        this.setState({
-          selectDrink: e.target.value
-        })
-        console.log('target value is ',e.target.value);
-        this.specialRender(e.target.value);
+  const moreInfo = info.data.drinks;
 
-    }
+  this.setState({categoriesBreakdown: moreInfo})
 
-    async specialRender(word){
+}
 
-      console.log('inside special redner ', word)
-      const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/search.php?s=${word}`)
-
-      if(!!info.data.drinks){
-        console.log(info.data);
-
-        this.setState({
-          drink: info.data.drinks,
-          rando: [],
-          cats: [],
-          visible: ''
-        })
-      }else{
-        this.setState({
-            drink: [],
-            rando: [],
-            cats: [],
-            visible: ''
-        })
-
-        console.log("bad data")
-        // console.log("Data generated is",info.data.drinks[0])
-      }
-
-
-    }
-
-     async showInfo(id){
-         const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${id}`);
-
-
-         const moreInfo = info.data.drinks;
-         // console.log(moreInfo);
-
-         this.setState({
-           cats: moreInfo,
-         })
-         console.log('inside showinfo is ',this.state.cats);
-     }
-
-
-giveMeWord(e){
-  // console.log('inside give me word ',e.target.id)
+giveMeWord(e) {
   this.oneDrinkInfo(e.target.id);
 
 }
 
-async oneDrinkInfo(word){
-  const info= await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${word}`);
-  console.log(info.data.drinks);
+async oneDrinkInfo(word) {
+  const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${word}`);
 
-  this.setState({
-    oneDrink: info.data.drinks
-  })
-
-  // console.log('oneDrinkInfo ', this.state.oneDrink)
+  this.setState({oneDrink: info.data.drinks})
 
 }
 
+render() {
+  return (<div className="App">
+    <h1>Cocktail Creator</h1>
 
+    <form onSubmit={this.handleIngridentChange}>
+      <input type="text" placeholder="Search by ingredients" value={this.state.selectIngrident} onChange={this.changeIngrident}></input>
+      <input type="submit" value="Add Ingredient"></input>
+    </form>
 
+    <button onClick={this.showCategories}>Categories</button>
+    <button onClick={() => this.generateRandomData()}>Random</button>
 
-  render() {
-    return (
-      <div className="App">
+    <input type="text" placeholder="Search drink by Name" value={this.state.selectDrink} onChange={this.handleChange}></input>
 
-        <button onClick={this.showCategories}>Categories</button>
-        <button onClick={()=>this.setView('Random')}>Random</button>
-        <input
-          type="text"
-          placeholder="search for a drink"
-          value= {this.state.selectDrink}
-          onChange={this.handleChange}
-          >
-        </input>
+    <div>
+      <RenderChoices result={this.state.drink}/>
+      <RenderRandom oneDrink={this.state.rando}/>
+      <RenderCategories categories={this.state.categories} showInfo={this.showInfo}/>
+      <DetailBreakdown info={this.state.categoriesBreakdown} giveMeWord={this.giveMeWord} drinkDetail={this.state.oneDrink}/>
+    </div>
 
-        <RenderChoices result={this.state.drink}/>
-        <RenderRandom oneDrink={this.state.rando}/>
-        <RenderCategories
-          categories={this.state.categories}
-          showInfo={this.showInfo}
-          />
-        
-        <DetailBreakdown
-          info={this.state.cats}
-          giveMeWord={this.giveMeWord}
-          drinkDetail={this.state.oneDrink}/>
-
-
-      </div>
-
-    );
-  }
+    <div>
+      <Ingredientsa ingr={this.state.choices}/>
+    </div>
+    {/*<IngridentsInfo info={this.state.test}/>
+          */
+    }
+  </div>)
+}
 }
 
 export default App;
