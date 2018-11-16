@@ -14,7 +14,7 @@ function RenderChoices(props) {
         }
       }
       return ingredients.map((p, i) => {
-        return (<div>{p}
+        return (<div key={i}>{p}
           : {measure[i]}</div>)
       })
     }

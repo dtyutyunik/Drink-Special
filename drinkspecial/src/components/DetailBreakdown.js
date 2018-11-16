@@ -6,7 +6,7 @@ export default function DetailBreakdown(props) {
   return (props.info.map(function(e) {
 
 
-    return (<div className="drinkInfo">
+    return (<div key={e.idDrink} className="drinkInfo">
       <div className='breakdown' id={e.idDrink}>
 
         <p>{e.strDrink}</p>
@@ -25,12 +25,12 @@ export default function DetailBreakdown(props) {
                     }
                   }
                   return ingredients.map((p, i) => {
-                    return (<div>{p}
-                      : {measure[i]}</div>)
+                    return (<div key={i}>
+                      {p}: {measure[i]}</div>)
                   })
                 }
 
-                return (<div>
+                return (<div key={e.idDrink}>
                   <p>{e.strAlcoholic}</p>
                   <p>Instructions: {e.strInstructions}</p>
                   <p>Served in: {e.strGlass}</p>
@@ -44,6 +44,7 @@ export default function DetailBreakdown(props) {
 
       </div>
       <img className="picHover"
+        key={e.idDrink}
         id={e.idDrink}
         onMouseEnter={props.giveMeWord}
         src={`${e.strDrinkThumb}`}

@@ -3,6 +3,11 @@
   color:white;
 } */
 
+body{
+
+  /* background-size: contain; */
+}
+
 .App {
   text-align: center;
 }
@@ -38,6 +43,7 @@
 
 .drinkInfo{
   display:flex;
+  /* background-image: url("./images/bar.jpg"); */
 }
 
 .drinkInfo > img{
@@ -52,6 +58,7 @@
 
 .newInfo{
   font-family: impact;
+
 }
 
 img.picHover{

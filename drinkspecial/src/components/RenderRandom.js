@@ -4,7 +4,6 @@ export default function RenderRandom(props){
 
     return(
 
-
       props.oneDrink.map(function(e){
         function showIng() {
           let ingredients = [];
@@ -17,14 +16,13 @@ export default function RenderRandom(props){
             }
           }
           return ingredients.map((p, i) => {
-            return (<div>{p}
-              : {measure[i]}</div>)
+            return (<div key={i}>
+              {p}: {measure[i]}</div>)
           })
         }
         return(
-          <div key={e.idDrink} className="drinkInfo">
+          <div key= {e} className="drinkInfo">
             <div className='breakdown'>
-
               <p>Name: {e.strDrink}</p>
               <p>{e.strAlcoholic}</p>
               <p>Category: {e.strCategory}</p>

@@ -4,7 +4,7 @@ export default function Ingredients(props){
 
   return(
     props.ingr.map(e=>{
-      return <p>{e}</p>
+      return <p key={e}>{e}</p>
     })
   )
 
