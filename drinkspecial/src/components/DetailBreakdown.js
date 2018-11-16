@@ -2,14 +2,15 @@ import React from 'react';
 
 export default function DetailBreakdown(props) {
 
-
   return (props.info.map(function(e) {
 
-
-    return (<div key={e.idDrink} className="drinkInfo">
+    return (<div key={e.idDrink} className="drinkInfo" data-selected={props.drinkDetail.length > 0
+        ? props.drinkDetail[0].idDrink === e.idDrink
+        : false
+}>
       <div className='breakdown' id={e.idDrink}>
 
-        <p>{e.strDrink}</p>
+        <h3>{e.strDrink}</h3>
 
         <div className="newInfo">
           {
@@ -43,12 +44,7 @@ export default function DetailBreakdown(props) {
         </div>
 
       </div>
-      <img className="picHover"
-        key={e.idDrink}
-        id={e.idDrink}
-        onMouseEnter={props.giveMeWord}
-        src={`${e.strDrinkThumb}`}
-        alt={`${e.strDrinkThumb}`}/>
+      <img className="picHover" key={e.idDrink} id={e.idDrink} onMouseEnter={props.giveMeWord} src={`${e.strDrinkThumb}`} alt={`${e.strDrinkThumb}`}/>
     </div>)
 
   }))

@@ -3,18 +3,25 @@
   color:white;
 } */
 
-body{
+html{
+/* background-image: url("./images/bar.jpg"); */
+background-image: url("./images/lounge.jpg");
 
-  /* background-size: contain; */
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  color:gold;
 }
 
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+h3{
+  font-size: 25px;
+  font-family: Cousine;
+  text-shadow: 0 0 5px black,0 0 5px gold;
+  /* font-family: Cousine; */
 }
 
 .App-header {
@@ -25,53 +32,82 @@ body{
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .drinkInfo{
   display:flex;
-  /* background-image: url("./images/bar.jpg"); */
+  margin: 0 20% 0 20%;
+  align-items: center;
+  justify-content: center;
+  /* max-width: 300px; */
+  /* max-height: 300px; */
+  /* overflow: scroll; */
+
 }
 
 .drinkInfo > img{
   flex: 1;
   width:200px;
   height:200px;
+  background: black;
+  text-align: center;
+
 }
 .breakdown{
   flex: 2;
-  border: 1px solid black;
+  border: 1px solid white;
+  background: black;
+  opacity: .8;
+  overflow: auto;
+  /* color:white; */
+  /* font-family: impact; */
+
+
 }
 
 .newInfo{
-  font-family: impact;
+  /* font-family: impact; */
+  /* max-width: 300px; */
+  /* max-height: 300px; */
+  color: gold;
+  text-align: center;
+  /* border: 1px solid red; */
+  align-items: center;
+    justify-content: center;
 
+  /* transition-delay: 1s; */
 }
 
 img.picHover{
+  text-align: center;
   max-width: 300px;
   max-height: 300px;
   pointer-events: auto;
-  /* box-shadow: 10px 10px; */
+  /* transition-delay: 2s; */
+
 }
 
+.choiceOfWord{
+  color:white;
+}
 img.picHover:hover{
-border-radius: 35%;
-/* opacity: .7; */
+/* border-radius: 35%; */
 
-  /* width: 400px; */
-  /* height: 400px; */
+}
+
+.drinkInfo .newInfo {
+  overflow: hidden;
+  height: 0px;
+  /* max-height: 0px; */
+  transition: all 1.3s;
+}
+.drinkInfo[data-selected="true"] .newInfo {
+  height: 300px;
+  /* max-height: calc(100%); */
 }

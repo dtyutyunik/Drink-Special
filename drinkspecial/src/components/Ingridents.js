@@ -4,7 +4,7 @@ export default function Ingredients(props){
 
   return(
     props.ingr.map(e=>{
-      return <p key={e}>{e}</p>
+      return <h2 className="choiceOfWord" key={e}>{e}</h2>
     })
   )
 

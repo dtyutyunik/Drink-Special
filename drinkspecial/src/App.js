@@ -7,9 +7,9 @@ import RenderCategories from './components/RenderCategories';
 import DetailBreakdown from './components/DetailBreakdown';
 import Ingredients from './components/Ingridents';
 import IngridentsInfo from './components/IngridentsInfo';
+import ReactAudioPlayer from 'react-audio-player';
 
 const KEYS = process.env.REACT_APP_DRINKING_API_KEY;
-
 
 class App extends Component {
 
@@ -29,8 +29,7 @@ class App extends Component {
       arr1: [],
       arr2: [],
       final: [],
-      finalRender:[],
-
+      finalRender: []
     }
 
     this.generateRandomData = this.generateRandomData.bind(this);
@@ -61,7 +60,7 @@ class App extends Component {
       arr1: [],
       arr2: [],
       final: [],
-      finalRender: [],
+      finalRender: []
     })
 
   }
@@ -82,7 +81,7 @@ class App extends Component {
         arr1: [],
         arr2: [],
         final: [],
-        finalRender: [],
+        finalRender: []
       })
 
     } else {
@@ -98,7 +97,7 @@ class App extends Component {
         arr1: [],
         arr2: [],
         final: [],
-        finalRender: [],
+        finalRender: []
       })
     }
 
@@ -106,12 +105,10 @@ class App extends Component {
 
   //handleChange of ingrident
   changeIngrident(e) {
-    this.setState({
-      selectIngredient: e.target.value
-    })
+    this.setState({selectIngredient: e.target.value})
   }
 
-// reflects each ingrident on the screen, submit of ingrident
+  // reflects each ingrident on the screen, submit of ingrident
   async handleIngridentChange(e) {
     e.preventDefault();
 
@@ -124,15 +121,11 @@ class App extends Component {
       rando: [],
       categoriesBreakdown: [],
       categories: [],
-      visible: '',
-
-
+      visible: ''
     })
 
     this.loadIngrident(this.state.selectIngredient);
   }
-
-
 
   async loadIngrident(word) {
 
@@ -170,13 +163,12 @@ class App extends Component {
           }
         })
         console.log('New Array: ', newArr);
-        this.setState({
-          final: newArr
-        })
+        this.setState({final: newArr})
       }
 
     } else {
-      alert('That is not considered an ingrident')
+
+      // alert('That is not considered an ingrident')
     }
 
     this.state.final.map(e => {
@@ -186,36 +178,31 @@ class App extends Component {
 
   }
 
-
   async filteredIngridents(word) {
 
-
-this.setState({
-  finalRender: [],
-})
+    this.setState({finalRender: []})
 
     const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/lookup.php?i=${word}`);
     // word.map(e=>{
 
-      this.setState({
-      finalRender: [...this.state.finalRender,info.data.drinks],
+    this.setState({
+      finalRender: [
+        ...this.state.finalRender,
+        info.data.drinks
+      ],
       drink: [],
       rando: [],
       categoriesBreakdown: [],
       categories: [],
-       visible: '',
-
-  })
-  // console.log('final redner',this.state.finalRender);
-
+      visible: ''
+    })
+    // console.log('final redner',this.state.finalRender);
 
   }
 
   handleChange(e) {
 
-    this.setState({
-      selectDrink: e.target.value
-    })
+    this.setState({selectDrink: e.target.value})
     this.specialRender(e.target.value);
 
   }
@@ -228,17 +215,17 @@ this.setState({
 
       this.setState({
         drink: info.data.drinks,
-         rando: [],
-         categoriesBreakdown: [],
-         choices: [],
-         categories: [],
-          visible: '',
-          selectIngredient: [],
-          arr1: [],
-          arr2: [],
-          final: [],
-          finalRender: [],
-        })
+        rando: [],
+        categoriesBreakdown: [],
+        choices: [],
+        categories: [],
+        visible: '',
+        selectIngredient: [],
+        arr1: [],
+        arr2: [],
+        final: [],
+        finalRender: []
+      })
     } else {
       this.setState({
         drink: [],
@@ -246,13 +233,13 @@ this.setState({
         categoriesBreakdown: [],
         choices: [],
         categories: [],
-         visible: '',
-         selectIngredient: [],
-         arr1: [],
-         arr2: [],
-         final: [],
-         finalRender: [],
-       })
+        visible: '',
+        selectIngredient: [],
+        arr1: [],
+        arr2: [],
+        final: [],
+        finalRender: []
+      })
     }
 
   }
@@ -283,44 +270,38 @@ this.setState({
       <h1>Cocktail Creator</h1>
 
       <form onSubmit={this.handleIngridentChange}>
-        <input type="text"
-          placeholder="Search by ingredients"
-          value={this.state.selectIngredient}
-          onChange={this.changeIngrident}>
-        </input>
+        <input type="text" placeholder="Search by ingredients" value={this.state.selectIngredient} onChange={this.changeIngrident}></input>
         <input type="submit" value="Add Ingredient"></input>
       </form>
 
       <button onClick={this.showCategories}>Categories</button>
       <button onClick={() => this.generateRandomData()}>Random</button>
 
-      <input type="text" placeholder="Search drink by Name"
-        value={this.state.selectDrink} onChange={this.handleChange}></input>
+      <input type="text" placeholder="Search drink by Name" value={this.state.selectDrink} onChange={this.handleChange}></input>
 
       <div>
         <RenderChoices result={this.state.drink}/>
         <RenderRandom oneDrink={this.state.rando}/>
 
-      <RenderCategories
-          categories={this.state.categories}
-          showInfo={this.showInfo}
-          />
+        <RenderCategories categories={this.state.categories} showInfo={this.showInfo}/>
 
-        <DetailBreakdown
-          info={this.state.categoriesBreakdown}
-           giveMeWord={this.giveMeWord}
-           drinkDetail={this.state.oneDrink}/>
+        <DetailBreakdown info={this.state.categoriesBreakdown} giveMeWord={this.giveMeWord} drinkDetail={this.state.oneDrink}/>
       </div>
 
       <div>
         <Ingredients ingr={this.state.choices}/>
       </div>
 
-      <IngridentsInfo info={this.state.finalRender}/>
-
+      <IngridentsInfo info={this.state.finalRender} giveMeWord={this.giveMeWord}/>
 
     </div>)
   }
 }
 
 export default App;
+
+// <ReactAudioPlayer
+//     src="./images/jazz.mp3"
+//     autoPlay
+//     controls
+//   />
