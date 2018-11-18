@@ -4,7 +4,7 @@ export default function DetailBreakdown(props) {
 
   return (props.info.map(function(e) {
 
-    return (<div key={e.idDrink} className="drinkInfo" data-selected={props.drinkDetail.length > 0
+    return (<div key={e.idDrink} className="drinkInfo" data-value={props.drinkDetail.length > 0
         ? props.drinkDetail[0].idDrink === e.idDrink
         : false
 }>

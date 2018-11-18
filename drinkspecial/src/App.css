@@ -1,26 +1,37 @@
-/* body{
-  background: black;
-  color:white;
-} */
+h1 {
+  text-shadow: 0 0 5px black, 0 0 5px gold;
+  text-align: center;
+  font-family: 'Oxygen Mono', monospace;
+}
 
-html{
-/* background-image: url("./images/bar.jpg"); */
-background-image: url("./images/lounge.jpg");
+button {
+  background-color: black;
+  color: gold;
+  font-size: 15px;
+}
 
+input {
+  background-color: black;
+  color: gold;
+  font-size: 15px;
+}
+
+html {
+  background-image: url("./images/lounge.jpg");
   background-size: cover;
   width: 100vw;
   height: 100vh;
-  color:gold;
+  color: gold;
 }
 
 .App {
   text-align: center;
 }
 
-h3{
+h3 {
   font-size: 25px;
   font-family: Cousine;
-  text-shadow: 0 0 5px black,0 0 5px gold;
+  text-shadow: 0 0 5px black, 0 0 5px gold;
   /* font-family: Cousine; */
 }
 
@@ -32,34 +43,16 @@ h3{
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+
+h2{
+  color:white;
+  text-shadow: 0 0 5px black, 0 0 5px gold;
 
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-
-.drinkInfo{
-  display:flex;
-  margin: 0 20% 0 20%;
-  align-items: center;
-  justify-content: center;
-  /* max-width: 300px; */
-  /* max-height: 300px; */
-  /* overflow: scroll; */
-
-}
-
-.drinkInfo > img{
-  flex: 1;
-  width:200px;
-  height:200px;
-  background: black;
-  text-align: center;
-
-}
-.breakdown{
+.breakdown {
   flex: 2;
   border: 1px solid white;
   background: black;
@@ -67,11 +60,9 @@ h3{
   overflow: auto;
   /* color:white; */
   /* font-family: impact; */
-
-
 }
 
-.newInfo{
+.newInfo {
   /* font-family: impact; */
   /* max-width: 300px; */
   /* max-height: 300px; */
@@ -79,35 +70,46 @@ h3{
   text-align: center;
   /* border: 1px solid red; */
   align-items: center;
-    justify-content: center;
-
+  justify-content: center;
   /* transition-delay: 1s; */
 }
 
-img.picHover{
+div {
+  border-radius: 15%;
+}
+
+img.picHover {
   text-align: center;
   max-width: 300px;
   max-height: 300px;
   pointer-events: auto;
-  /* transition-delay: 2s; */
-
+  border-radius: 15%;
 }
 
-.choiceOfWord{
-  color:white;
+.drinkInfo {
+  display: flex;
+  margin: 0 20% 0 20%;
+  align-items: center;
+  justify-content: center;
 }
-img.picHover:hover{
-/* border-radius: 35%; */
 
+.drinkInfo>img {
+  flex: 1;
+  width: 200px;
+  height: 200px;
+  background: black;
+  text-align: center;
+  border-radius: 15%;
 }
 
 .drinkInfo .newInfo {
   overflow: hidden;
   height: 0px;
-  /* max-height: 0px; */
+
   transition: all 1.3s;
 }
-.drinkInfo[data-selected="true"] .newInfo {
+
+.drinkInfo[data-value="true"] .newInfo {
   height: 300px;
-  /* max-height: calc(100%); */
+
 }
