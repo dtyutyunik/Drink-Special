@@ -132,9 +132,9 @@ componentDidMount(){
     let ingredientTester=''
     const info = await axios.get(`https://www.thecocktaildb.com/api/json/v1/${KEYS}/filter.php?i=${this.state.selectIngredient}`);
 
-    // if the search the individual entered is not an ingrident it will show up
+    // if the search the individual entered is not an ingredient it will show up
     if(info.data.drinks===undefined){
-      ingredientTester=" is not an ingrident";
+      ingredientTester=" is not an ingredient";
     }
 
     await this.setState({
