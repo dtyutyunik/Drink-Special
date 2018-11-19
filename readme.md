@@ -30,6 +30,10 @@ It will pull data from the below api:
 A current app already in marketplace, the template I'm building off of
 ![App](app.jpg)
 
+
+#Youtube link to the video detailing the react project
+<https://www.youtube.com/watch?v=E984y8T8Ilk&feature=youtu.be>
+
 POST MVP
 Potential goals being able to favorite a drink
 -->Issue would involve some sort of login to relate it a certain individual
