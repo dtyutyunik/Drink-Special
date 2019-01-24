@@ -16,6 +16,10 @@ input {
   font-size: 15px;
 }
 
+
+
+
+
 html {
   background-image: url("./images/lounge.jpg");
   background-size: cover;
@@ -51,6 +55,38 @@ h2{
 
 }
 
+@media only screen and (max-width: 450px) {
+
+  .breakdown {
+    flex: 2;
+    border: 1px solid white;
+    background: black;
+    opacity: .8;
+    overflow: auto;
+    width:50%!important;
+    /* height: 100vh; */
+
+  }
+
+  .drinkInfo>img {
+    flex: 1;
+    width: 50%!important;
+    height: 100px!important;
+    background: black;
+    text-align: center;
+    border-radius: 15%;
+  }
+
+  .breakdown>img{
+    width:50%!important;
+    height:100px!important;
+  }
+
+}
+
+
+
+
 
 .breakdown {
   flex: 2;
@@ -58,20 +94,17 @@ h2{
   background: black;
   opacity: .8;
   overflow: auto;
-  /* color:white; */
-  /* font-family: impact; */
+
 }
 
 .newInfo {
-  /* font-family: impact; */
-  /* max-width: 300px; */
-  /* max-height: 300px; */
+
   color: gold;
   text-align: center;
-  /* border: 1px solid red; */
+
   align-items: center;
   justify-content: center;
-  /* transition-delay: 1s; */
+
 }
 
 div {
