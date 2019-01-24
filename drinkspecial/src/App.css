@@ -64,8 +64,19 @@ h2{
     opacity: .8;
     overflow: auto;
     width:50%!important;
+    height: auto;
     /* height: 100vh; */
     font-size: .8em!important;
+    padding-left: .4em;
+    padding-right: .4em;
+
+  }
+
+  .newInfo{
+    padding-left: .4em;
+    padding-right: .4em;
+    padding-bottom: .4em;
+
 
   }
 
