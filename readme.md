@@ -1,6 +1,6 @@
-#Name: Cocktail Creator
+# Name: Cocktail Creator
 
-##Synopsis:
+## Synopsis:
 A react created website that lets you search cocktails based on its name.
 You can sort via categories--ie: beer, cocktails, shots, etc.
 You can click random and it will load
@@ -9,8 +9,7 @@ You can click random and it will load
 -->The ingredients
 -->The picture
 
-Current Potential issues:
-being able to render a different drink based on the query of search using regex conation
+
 
 Sources:
 It will pull data from the below api:
@@ -20,6 +19,7 @@ It will pull data from the below api:
 WireFrame
 ![wireFrame](WireFrames/wireframe.jpg)
 
+Screenshots
 ![Landing](WireFrames/Landing.png)
 ![Ingredient](WireFrames/Ingredient.png)
 ![Random](WireFrames/Random.png)
