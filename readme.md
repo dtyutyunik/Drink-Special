@@ -31,7 +31,7 @@ A current app already in marketplace, the template I'm building off of
 ![App](app.jpg)
 
 
-#Youtube link to the video detailing the react project
+# Youtube link to the video detailing the react project
 <https://www.youtube.com/watch?v=E984y8T8Ilk&feature=youtu.be>
 
 POST MVP
@@ -39,18 +39,6 @@ Potential goals being able to favorite a drink
 -->Issue would involve some sort of login to relate it a certain individual
 -->Would need to find a suitable api for login purposes
 
-Goals to accomplish:
-Tuesday get the categories button to work so upon click create more buttons
-each individual button has a handler that renders all the drinks under each Category
---> need to decide if to create a separate search or keep the search as it currently is
---> aka does it let u search only through the current array of category or overall
-
-implement ingredients in the sense of searching via ingredients
-
-also implement a feature of clicking on a drink that will perhaps load more info of the drinks
-
-
-post mvp--> implememnting some sort of way to favorite or perhaps a ranking system to vote for drinks based on what u like
 
 Website is hosted on
 <https://cocktail_creator.surge.sh/>
