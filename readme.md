@@ -17,7 +17,7 @@ It will pull data from the below api:
 <https://www.thecocktaildb.com/api.php>
 
 
-
+WireFrame
 ![wireFrame](WireFrames/wireframe.jpg)
 
 ![Landing](WireFrames/Landing.png)
